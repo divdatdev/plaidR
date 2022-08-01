@@ -1,0 +1,19 @@
+# plaidr::WatchlistScreeningHit
+
+Data from a government watchlist or PEP list that has been attached to the screening.
+
+## Properties
+Name | Type | Description | Notes
+------------ | ------------- | ------------- | -------------
+**id** | **character** | ID of the associated screening hit. | 
+**review_status** | [**WatchlistScreeningHitStatus**](WatchlistScreeningHitStatus.md) |  | 
+**first_active** | **character** | An ISO8601 formatted timestamp. | 
+**inactive_since** | **character** | An ISO8601 formatted timestamp. | 
+**historical_since** | **character** | An ISO8601 formatted timestamp. | 
+**list_code** | [**IndividualWatchlistCode**](IndividualWatchlistCode.md) |  | 
+**plaid_uid** | **character** | A universal identifier for a watchlist individual that is stable across searches and updates. | 
+**source_uid** | **character** | The identifier provided by the source sanction or watchlist. When one is not provided by the source, this is &#x60;null&#x60;. | 
+**analysis** | [**ScreeningHitAnalysis**](ScreeningHitAnalysis.md) |  | [optional] 
+**data** | [**ScreeningHitData**](ScreeningHitData.md) |  | [optional] 
+
+
