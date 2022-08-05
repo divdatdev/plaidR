@@ -58,6 +58,6 @@ CountryCode <- R6::R6Class(
     res <- gsub("^\\[|\\]$", "",
         "[US, GB, ES, NL, FR, IE, CA, DE, IT]"
     )
-    unlist(strsplit(res, ", "))
+    noquote(unlist(strsplit(res, ", ")))
 }
 
