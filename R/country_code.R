@@ -28,7 +28,7 @@ CountryCode <- R6::R6Class(
             if (!val %in% enumvec)
                 stop("Use one of the valid values: ",
                     paste0(enumvec, collapse = ", "))
-            private$value <- val
+            private$value <- noquote(val)
         },
         toJSON = function() {
             jsonlite::toJSON(private$value)
