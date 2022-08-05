@@ -39,8 +39,8 @@ CountryCode <- R6::R6Class(
             self
         },
         toJSONString = function() {
-            as.character(jsonlite::toJSON(private$value,
-                auto_unbox = TRUE))
+            jsonlite::toJSON(private$value,
+                auto_unbox = TRUE)
         },
         fromJSONString = function(CountryCodeJson) {
             private$value <- jsonlite::fromJSON(CountryCodeJson,
