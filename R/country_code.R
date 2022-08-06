@@ -23,15 +23,17 @@ CountryCode <- R6::R6Class(
             val <- unlist(local.optional.var)
             enumvec <- .parse_CountryCode()
 
+            print(enumvec)
             stopifnot(length(val) == 1L)
 
             if (!val %in% enumvec)
                 stop("Use one of the valid values: ",
                     paste0(enumvec, collapse = ", "))
-            private$value <- noquote(val)
+            private$value <- val
         },
         toJSON = function() {
-            jsonlite::toJSON(private$value)
+            # jsonlite::toJSON(private$value,  auto_unbox = TRUE)
+            noquote(private$value)
         },
         fromJSON = function(CountryCodeJson) {
             private$value <- jsonlite::fromJSON(CountryCodeJson,
@@ -39,8 +41,9 @@ CountryCode <- R6::R6Class(
             self
         },
         toJSONString = function() {
-            jsonlite::toJSON(private$value,
-                auto_unbox = TRUE)
+            # jsonlite::toJSON(private$value,
+            #     auto_unbox = TRUE)
+          noquote(private$value)
         },
         fromJSONString = function(CountryCodeJson) {
             private$value <- jsonlite::fromJSON(CountryCodeJson,
@@ -61,3 +64,7 @@ CountryCode <- R6::R6Class(
     noquote(unlist(strsplit(res, ", ")))
 }
 
+
+# COUNTRY_CODE <- CountryCode$new('US')
+# print(COUNTRY_CODE$toJSONString())
+# COUNTRY_CODE$toJSON()
