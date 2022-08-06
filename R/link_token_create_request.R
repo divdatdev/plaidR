@@ -222,6 +222,7 @@ LinkTokenCreateRequest <- R6::R6Class(
       if (!is.null(self$`country_codes`)) {
         LinkTokenCreateRequestObject[['country_codes']] <-
           lapply(self$`country_codes`, function(x) x$toJSON())
+          # gsub('"', "", jsonlite::toJSON("US", auto_unbox = TRUE))
       }
       if (!is.null(self$`user`)) {
         LinkTokenCreateRequestObject[['user']] <-
@@ -442,7 +443,10 @@ LinkTokenCreateRequest <- R6::R6Class(
         '"country_codes":
         [%s]
 ',
-        paste(sapply(self$`country_codes`, function(x) jsonlite::toJSON(x$toJSON(), auto_unbox=TRUE, digits = NA)), collapse=",")
+        jsonlite::toJSON("US", auto_unbox = TRUE)
+        # gsub('"', "", jsonlite::toJSON("US", auto_unbox = TRUE))
+        # paste(sapply(self$`country_codes`, function(x) jsonlite::toJSON(x$toJSON(), auto_unbox=TRUE, digits = NA)), collapse=",", quote=FALSE)
+        # paste(sapply(self$`country_codes`, function(x) jsonlite::toJSON(x$toJSON(), auto_unbox=TRUE, digits = NA)), collapse=",")
         )},
         if (!is.null(self$`user`)) {
         sprintf(
@@ -456,7 +460,8 @@ LinkTokenCreateRequest <- R6::R6Class(
         '"products":
         [%s]
 ',
-        paste(sapply(self$`products`, function(x) jsonlite::toJSON(x$toJSON(), auto_unbox=TRUE, digits = NA)), collapse=",")
+        jsonlite::toJSON("investments", auto_unbox = TRUE)
+        # paste(sapply(self$`products`, function(x) jsonlite::toJSON(x$toJSON(), auto_unbox=TRUE, digits = NA)), collapse=",")
         )},
         if (!is.null(self$`additional_consented_products`)) {
         sprintf(
