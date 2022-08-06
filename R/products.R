@@ -31,7 +31,8 @@ Products <- R6::R6Class(
             private$value <- val
         },
         toJSON = function() {
-            jsonlite::toJSON(private$value, auto_unbox = TRUE)
+            # jsonlite::toJSON(private$value, auto_unbox = TRUE)
+            noquote(private$value)
         },
         fromJSON = function(ProductsJson) {
             private$value <- jsonlite::fromJSON(ProductsJson,
@@ -39,8 +40,9 @@ Products <- R6::R6Class(
             self
         },
         toJSONString = function() {
-            as.character(jsonlite::toJSON(private$value,
-                auto_unbox = TRUE))
+            # as.character(jsonlite::toJSON(private$value,
+            #     auto_unbox = TRUE))
+            noquote(private$value)
         },
         fromJSONString = function(ProductsJson) {
             private$value <- jsonlite::fromJSON(ProductsJson,
@@ -58,6 +60,12 @@ Products <- R6::R6Class(
     res <- gsub("^\\[|\\]$", "",
         "[assets, auth, balance, identity, investments, liabilities, payment_initiation, identity_verification, transactions, credit_details, income, income_verification, deposit_switch, standing_orders, transfer, employment, recurring_transactions]"
     )
-    unlist(strsplit(res, ", "))
+    noquote(unlist(strsplit(res, ", ")))
 }
+
+# 
+# product <- Products$new("investments")
+# print(product$toJSONString())
+# print(product$toJSON())
+# 
 
