@@ -39,6 +39,7 @@ ApiClient  <- R6::R6Class(
   public = list(
     # base path of all requests
     base_path = "https://production.plaid.com",
+    # base_path = https://development.plaid.com,
     # user agent in the HTTP request
     user_agent = "OpenAPI-Generator/1.0.0/r",
     # default headers in the HTTP request
@@ -158,7 +159,11 @@ ApiClient  <- R6::R6Class(
 
     # Deserialize the content of api response to the given type.
     deserialize = function(resp, return_type, pkg_env) {
+      print(resp)
+      print(return_type)
+      print(pkg_env)
       resp_obj <- jsonlite::fromJSON(httr::content(resp, "text", encoding = "UTF-8"))
+      print(resp_obj)
       self$deserializeObj(resp_obj, return_type, pkg_env)
     },
 
@@ -170,7 +175,11 @@ ApiClient  <- R6::R6Class(
     deserializeObj = function(obj, return_type, pkg_env) {
       return_obj <- NULL
       primitive_types <- c("character", "numeric", "integer", "logical", "complex")
-
+      
+      print(obj)
+      print(return_type)
+      print(pkg_env)
+      
       # To handle the "map" type
       if (startsWith(return_type, "map(")) {
         inner_return_type <- regmatches(return_type, regexec(pattern = "map\\((.*)\\)", return_type))[[1]][2]

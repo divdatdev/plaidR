@@ -10828,8 +10828,13 @@ PlaidApi <- R6::R6Class(
       }
     },
     InvestmentsHoldingsGet = function(investments_holdings_get_request, data_file=NULL, ...) {
+      #This is where the Failed to deserialize response error is found
+      print(investments_holdings_get_request)
+      print(data_file)
       api_response <- self$InvestmentsHoldingsGetWithHttpInfo(investments_holdings_get_request, data_file = data_file, ...)
+      print(api_response)
       resp <- api_response$response
+      print(resp)
       if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
         api_response$content
       } else if (httr::status_code(resp) >= 300 && httr::status_code(resp) <= 399) {
@@ -10852,6 +10857,7 @@ PlaidApi <- R6::R6Class(
 
       if (!missing(`investments_holdings_get_request`)) {
         body <- `investments_holdings_get_request`$toJSONString()
+        print(body)
       } else {
         body <- NULL
       }
@@ -10870,12 +10876,21 @@ PlaidApi <- R6::R6Class(
         header_params["PLAID-SECRET"] <- paste(unlist(self$api_client$api_keys["PLAID-SECRET"]), collapse = "")
       }
 
+      # resp <- self$api_client$CallApi(url = paste0(self$api_client$base_path, url_path),
+      #                            method = "POST",
+      #                            query_params = query_params,
+      #                            header_params = header_params,
+      #                            body = body,
+      #                            ...)
+      
       resp <- self$api_client$CallApi(url = paste0(self$api_client$base_path, url_path),
-                                 method = "POST",
-                                 query_params = query_params,
-                                 header_params = header_params,
-                                 body = body,
-                                 ...)
+                                      method = "POST",
+                                      query_params = query_params,
+                                      header_params = header_params,
+                                      body = body,
+                                      ...)
+      
+      print(resp)
 
       if (httr::status_code(resp) >= 200 && httr::status_code(resp) <= 299) {
         # save response in a file

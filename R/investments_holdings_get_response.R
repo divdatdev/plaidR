@@ -87,15 +87,23 @@ InvestmentsHoldingsGetResponse <- R6::R6Class(
       InvestmentsHoldingsGetResponseObject
     },
     fromJSON = function(InvestmentsHoldingsGetResponseJson) {
+      print(InvestmentsHoldingsGetResponseJson)
       InvestmentsHoldingsGetResponseObject <- jsonlite::fromJSON(InvestmentsHoldingsGetResponseJson)
+      print(InvestmentsHoldingsGetResponseObject)
       if (!is.null(InvestmentsHoldingsGetResponseObject$`accounts`)) {
         self$`accounts` <- ApiClient$new()$deserializeObj(InvestmentsHoldingsGetResponseObject$`accounts`, "array[AccountBase]", loadNamespace("plaidr"))
+        print(InvestmentsHoldingsGetResponseObject$`accounts`)
+        # self$`accounts` <- ApiClient$deserializeObj(InvestmentsHoldingsGetResponseObject$`accounts`, "array[AccountBase]", loadNamespace("plaidr"))
       }
       if (!is.null(InvestmentsHoldingsGetResponseObject$`holdings`)) {
         self$`holdings` <- ApiClient$new()$deserializeObj(InvestmentsHoldingsGetResponseObject$`holdings`, "array[Holding]", loadNamespace("plaidr"))
+        print(InvestmentsHoldingsGetResponseObject$`holdings`)
+        # self$`holdings` <- ApiClient$deserializeObj(InvestmentsHoldingsGetResponseObject$`holdings`, "array[Holding]", loadNamespace("plaidr"))
       }
       if (!is.null(InvestmentsHoldingsGetResponseObject$`securities`)) {
         self$`securities` <- ApiClient$new()$deserializeObj(InvestmentsHoldingsGetResponseObject$`securities`, "array[Security]", loadNamespace("plaidr"))
+        print(InvestmentsHoldingsGetResponseObject$`securities`)
+        # self$`securities` <- ApiClient$deserializeObj(InvestmentsHoldingsGetResponseObject$`securities`, "array[Security]", loadNamespace("plaidr"))
       }
       if (!is.null(InvestmentsHoldingsGetResponseObject$`item`)) {
         itemObject <- Item$new()
@@ -149,10 +157,17 @@ InvestmentsHoldingsGetResponse <- R6::R6Class(
       paste('{', jsoncontent, '}', sep = "")
     },
     fromJSONString = function(InvestmentsHoldingsGetResponseJson) {
+      print(InvestmentsHoldingsGetResponseJson)
       InvestmentsHoldingsGetResponseObject <- jsonlite::fromJSON(InvestmentsHoldingsGetResponseJson)
+      print(InvestmentsHoldingsGetResponseObject)
       self$`accounts` <- ApiClient$new()$deserializeObj(InvestmentsHoldingsGetResponseObject$`accounts`, "array[AccountBase]", loadNamespace("plaidr"))
+      # self$`accounts` <- ApiClient$deserializeObj(InvestmentsHoldingsGetResponseObject$`accounts`, "array[AccountBase]", loadNamespace("plaidr"))
       self$`holdings` <- ApiClient$new()$deserializeObj(InvestmentsHoldingsGetResponseObject$`holdings`, "array[Holding]", loadNamespace("plaidr"))
+      # self$`holdings` <- ApiClient$deserializeObj(InvestmentsHoldingsGetResponseObject$`holdings`, "array[Holding]", loadNamespace("plaidr"))
+      
       self$`securities` <- ApiClient$new()$deserializeObj(InvestmentsHoldingsGetResponseObject$`securities`, "array[Security]", loadNamespace("plaidr"))
+      # self$`securities` <- ApiClient$deserializeObj(InvestmentsHoldingsGetResponseObject$`securities`, "array[Security]", loadNamespace("plaidr"))
+      
       self$`item` <- Item$new()$fromJSON(jsonlite::toJSON(InvestmentsHoldingsGetResponseObject$item, auto_unbox = TRUE, digits = NA))
       self$`request_id` <- InvestmentsHoldingsGetResponseObject$`request_id`
       self
